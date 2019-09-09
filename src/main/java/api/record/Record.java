@@ -3,13 +3,11 @@ package api.record;
 
 import api.config.CustomUserDetails;
 import api.notebook.Notebook;
-import api.config.users.Customer;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -28,7 +26,6 @@ public class Record {
     private BigDecimal price;
     private Boolean active;
 
-
     @ManyToOne
     @JoinColumn(name = "notebook_id")
     private Notebook notebook;
@@ -37,7 +34,11 @@ public class Record {
     private RecordStatus status = RecordStatus.Waiting;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "customer_id")
     private CustomUserDetails customer;
+
+    @ManyToOne
+    @JoinColumn(name = "producer_id")
+    private CustomUserDetails producer;
 
 }

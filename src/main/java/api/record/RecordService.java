@@ -1,6 +1,6 @@
 package api.record;
 
-import api.config.users.Customer;
+import api.config.CustomUserDetailRepository;
 import api.config.users.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,8 @@ public class RecordService {
     UserService userService;
     @Autowired
     private RecordRepository recordRepository;
+    @Autowired
+    CustomUserDetailRepository customUserDetailRepository;
 
     public List<Record> getRecords() {
         return recordRepository.findAll();
@@ -39,8 +41,9 @@ public class RecordService {
         Date recordDate = new Date();
         recordDate = simpleDateFormat.parse(simpleDateFormat.format(recordDate));
         record.setDate(recordDate);
-        record.setCustomer( userService.getCurrentUSer());
-
+        //record.setCustomer(customUserDetailRepository.findByUserName('%'+record.getCustomerName()+'%'));
+        record.setNotebook(userService.getCurrentUSer().getNotebook());
+        record.setProducer( userService.getCurrentUSer());
         recordRepository.save(record);
         return modelMapper.map(record, RecordDto.class);
 
@@ -65,7 +68,7 @@ public class RecordService {
     }
 
 
-    public List<Record> getActiveRecordListByDate() {
+    public List<Record> getWaitingRecords() {
         RecordStatus status = RecordStatus.Waiting;
         return recordRepository.getWaitingRecord(status);
     }

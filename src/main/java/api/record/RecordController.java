@@ -1,5 +1,8 @@
 package api.record;
 
+import api.config.CustomUserDetailRepository;
+import api.config.CustomUserDetails;
+import api.config.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,9 +50,9 @@ public class RecordController {
     public List<Record> getActiveRecordListByDate(@PathVariable  @DateTimeFormat(pattern = "yyyy-MM-dd") Date date){
         return recordService.getActiveRecordListByDate(date);
     }
-    @GetMapping("/get-waiting-list/waiting")
+    @GetMapping("/get-waiting-list")
     public List<Record> getWaitingRecord(){
-        return recordService.getActiveRecordListByDate();
+        return recordService.getWaitingRecords();
     }
 
 

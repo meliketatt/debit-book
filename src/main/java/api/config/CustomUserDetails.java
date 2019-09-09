@@ -39,11 +39,12 @@ public class CustomUserDetails implements UserDetails, Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<CustomUserRole> roles;
 
-    @OneToMany(mappedBy = "customer",orphanRemoval = true)
+    @OneToMany(mappedBy = "customer",orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Record> recordList;
 
-    @OneToMany(mappedBy = "producer",orphanRemoval = true, cascade = CascadeType.ALL)
-    private List<Notebook> notebookList;
+
+    @OneToOne(mappedBy = "producer",orphanRemoval = true, cascade = CascadeType.ALL)
+    private Notebook notebook;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

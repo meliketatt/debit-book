@@ -1,5 +1,6 @@
 package api.notebook;
 
+import api.config.CustomUserDetails;
 import api.config.users.UserService;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class NotebookService {
 
     public Notebook saveNotebook( Notebook note)
     {
+        userService.getCurrentUSer().setNotebook(note);
         note.setProducer( userService.getCurrentUSer());
         return notebookRepository.save(note);
     }

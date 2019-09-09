@@ -19,4 +19,6 @@ public interface RecordRepository extends JpaRepository<Record,Long> {
     public  List<Record> getWaitingRecord(RecordStatus status);
 
 
+
+
 }

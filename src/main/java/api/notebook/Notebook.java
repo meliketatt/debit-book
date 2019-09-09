@@ -2,7 +2,6 @@ package api.notebook;
 
 import api.config.CustomUserDetails;
 import api.record.Record;
-import api.config.users.Producer;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
@@ -23,6 +22,8 @@ public class Notebook {
     @Column(name = "notebook_id")
     private Long id;
 
+    /*@OneToOne(mappedBy = "producer",orphanRemoval = true, cascade = CascadeType.ALL)
+    private Notebook notebook;*/
 
     @OneToMany(mappedBy = "notebook",orphanRemoval = true)
     private List<Record> recordList;
