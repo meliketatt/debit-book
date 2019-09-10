@@ -10,7 +10,7 @@ public interface CustomUserDetailRepository extends JpaRepository<CustomUserDeta
 
     public CustomUserDetails findByUsername(String userName);
 
-    @Query(value = "select * from users  where username = ?1 ", nativeQuery = true)
+    @Query(value = "select * from users  where username = ?1 " , nativeQuery = true)
     CustomUserDetails findByUserName(String currentUserName);
 
     /*@Query(value = "select * from users  where username LIKE ?1 ", nativeQuery = true)

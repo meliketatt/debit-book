@@ -27,7 +27,7 @@ public class UserService {
         if ( !(authentication instanceof AnonymousAuthenticationToken)) {
             String currentUserName = authentication.getName();
             if (Strings.isNotEmpty(currentUserName)) {
-                userDetail = customUserDetail.findByUsername(currentUserName);
+                userDetail = customUserDetail.findByUserName(currentUserName);
             }
         }
         return userDetail;
